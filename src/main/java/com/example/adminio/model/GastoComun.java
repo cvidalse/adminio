@@ -2,6 +2,7 @@ package com.example.adminio.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 @Entity
 @Table(name="gasto_comun")
@@ -20,8 +21,8 @@ public class GastoComun {
         this.id = id;
     }
 
-    @Column(name = "gasto_fecha")
-    private String fechaIngreso;
+    @Temporal(TemporalType.DATE)
+    private Date fechaPago;
 
     @NotNull
     @Column(name = "gasto_descrip")
@@ -37,26 +38,26 @@ public class GastoComun {
     @Override
     public String toString() {
         return "GastoComun{" +
-                "fechaIngreso='" + fechaIngreso + '\'' +
+                "fechaPago='" + fechaPago + '\'' +
                 ", Descripcion='" + descripcion + '\'' +
                 ", valor=" + valor +
                 '}';
     }
 
-    public GastoComun(String fechaIngreso, String descripcion, int valor) {
-        this.fechaIngreso = fechaIngreso;
+    public GastoComun(Date fechaIngreso, String descripcion, int valor) {
+        this.fechaPago = fechaIngreso;
         this.descripcion = descripcion;
         this.valor = valor;
     }
 
     public GastoComun(){}
 
-    public String getFechaIngreso() {
-        return fechaIngreso;
+    public Date getFechaPago() {
+        return fechaPago;
     }
 
-    public void setFechaIngreso(String fechaIngreso) {
-        this.fechaIngreso = fechaIngreso;
+    public void setFechaPago(Date fechaIngreso) {
+        this.fechaPago = fechaIngreso;
     }
 
     public String getDescripcion() {
