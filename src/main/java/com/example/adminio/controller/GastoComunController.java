@@ -71,14 +71,9 @@ public class GastoComunController {
         List<Propietario> propietarios = (List<Propietario>) propietarioDAO.findAll();
         double gasto = calculoGastosComunes.calcularGastosMes(dateHandler.getMesActual());
         double m2Totales = calculoGastosComunes.calcularTotalM2(propietarios);
-        System.out.println("calcular gasto"+gasto);
-
         double cobro = 0;
         for(Propietario propietario : propietarios){
             double proporcion = (double) propietario.getM2()/m2Totales;
-            System.out.println("m2totales"+m2Totales);
-            System.out.println("m2 pro"+propietario.getM2());
-            System.out.println(propietario.getM2()/m2Totales);
             cobro = gasto*proporcion;
             boletaDao.save(new Boleta(mes,cobro,propietario,false,fvencimiento,hoy));
         }

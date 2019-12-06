@@ -27,9 +27,7 @@ public class DateHandler {
         LocalDate localDate = fconsulta.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         localDate = localDate.minus(1, ChronoUnit.MONTHS);
         String fechainicio = localDate.getYear() + "-" + (localDate.getMonthValue()) + "-01";
-        System.out.println(fechainicio);
         String ftermino = localDate.getYear()+ "-"+(localDate.getMonthValue())+"-"+localDate.lengthOfMonth();
-        System.out.println(ftermino);
         Date finicio = new SimpleDateFormat("yyyy-MM-dd").parse(fechainicio);
         Date ftermino2 = new SimpleDateFormat("yyyy-MM-dd").parse(ftermino);
         List<GastoComun> lista = gastoComunDAO.findAllByFechaPagoBetween(finicio,ftermino2);
@@ -43,7 +41,6 @@ public class DateHandler {
         String ftermino = localDate.getYear()+ "-"+(localDate.getMonthValue())+"-"+localDate.lengthOfMonth();
         localDate = localDate.minus(6, ChronoUnit.MONTHS);
         String fechainicio = localDate.getYear() + "-" + ((localDate.getMonthValue())) + "-01";
-        System.out.println(fechainicio);
         Date finicio = new SimpleDateFormat("yyyy-MM-dd").parse(fechainicio);
         Date ftermino2 = new SimpleDateFormat("yyyy-MM-dd").parse(ftermino);
         List<GastoComun> lista = gastoComunDAO.findAllByFechaPagoBetween(finicio,ftermino2);
