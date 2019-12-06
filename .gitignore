@@ -1,8 +1,10 @@
 HELP.md
-target/
+*.bak_*
+.directory
+.mvn
+/target/
 !.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**
-!**/src/test/**
+/datausr/
 
 ### STS ###
 .apt_generated
@@ -25,7 +27,8 @@ target/
 /dist/
 /nbdist/
 /.nb-gradle/
-build/
+/build/
 
 ### VS Code ###
 .vscode/
+application.properties
