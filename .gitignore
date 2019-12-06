@@ -14,4 +14,9 @@
 # Maven
 log/
 target/
-.mvn/wrapper/maven-wrapper.jar
+HELP.md
+*.bak_*
+.directory
+.mvn
+/target/
+!.mvn/wrapper/maven-wrapper.jar
