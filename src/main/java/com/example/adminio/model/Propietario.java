@@ -35,7 +35,7 @@ public class Propietario {
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "pro_id")
-    private Set<Boleta> boletas;
+    private List<Boleta> boletas;
 
     public Propietario(Long id, String nombre,int m2) {
         this.id = id;
@@ -120,11 +120,11 @@ public class Propietario {
         this.id = id;
     }
 
-    public Set<Boleta> getBoletas() {
+    public List<Boleta> getBoletas() {
         return boletas;
     }
 
-    public void setBoletas(Set<Boleta> boletas) {
+    public void setBoletas(List<Boleta> boletas) {
         this.boletas = boletas;
     }
 }

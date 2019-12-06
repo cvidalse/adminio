@@ -1,11 +1,12 @@
 package com.example.adminio.Utiles;
 
+import com.example.adminio.Utiles.DataAuxiliar.BoletaAuxiliar;
+import com.example.adminio.model.Boleta;
 import com.example.adminio.model.GastoComun;
+import com.example.adminio.model.Propietario;
 import com.example.adminio.model.data.GastoComunDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RestController;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -13,6 +14,7 @@ import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
+
 
 @Service
 public class DateHandler {
@@ -45,5 +47,11 @@ public class DateHandler {
         Date ftermino2 = new SimpleDateFormat("yyyy-MM-dd").parse(ftermino);
         List<GastoComun> lista = gastoComunDAO.findAllByFechaPagoBetween(finicio,ftermino2);
         return lista;
+    }
+
+    public BoletaAuxiliar ultimaBoleta(Propietario propietario){
+        List<Boleta> boletas = propietario.getBoletas();
+        Boleta boleta = boletas.get(boletas.size()-1);
+        return  new BoletaAuxiliar(boleta.getId(),boleta.getMes(),boleta.getValor(),boleta.getFechaVencimiento(),boleta.isPagada(),boleta.getFechaEmision());
     }
 }

@@ -9,4 +9,5 @@ import javax.transaction.Transactional;
 @Transactional
 @Repository
 public interface BoletaDAO extends CrudRepository<Boleta,Long> {
+
 }

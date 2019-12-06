@@ -31,6 +31,7 @@ public class Boleta {
     @Column(name = "boleta_fechaemision")
     private Date fechaEmision;
 
+    public Boleta(){}
 
     public Boleta( String mes, double valor, Propietario propietario, boolean pago, Date fechaVencimiento,Date fechaEmision) {
         this.fechaVencimiento = fechaVencimiento;
@@ -96,4 +97,17 @@ public class Boleta {
     public void setFechaEmision(Date fechaEmision) {
         this.fechaEmision = fechaEmision;
     }
+
+    @Override
+    public String toString() {
+        return "Boleta{" +
+                "id=" + id +
+                ", mes='" + mes + '\'' +
+                ", valor=" + valor +
+                "fechaVencimiento=" + fechaVencimiento +
+                ", pagada=" + pagada +
+                ", fechaEmision=" + fechaEmision +
+                '}';
+    }
+
 }

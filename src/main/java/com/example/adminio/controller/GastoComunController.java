@@ -1,6 +1,7 @@
 package com.example.adminio.controller;
 
 import com.example.adminio.Utiles.CalculoGastosComunes;
+import com.example.adminio.Utiles.DataAuxiliar.BoletaAuxiliar;
 import com.example.adminio.Utiles.DateHandler;
 import com.example.adminio.model.Boleta;
 import com.example.adminio.model.GastoComun;
@@ -77,6 +78,12 @@ public class GastoComunController {
             cobro = gasto*proporcion;
             boletaDao.save(new Boleta(mes,cobro,propietario,false,fvencimiento,hoy));
         }
+    }
+
+    @RequestMapping("/ultimaBoleta")
+    public BoletaAuxiliar ultimaBoleta(@RequestParam(value = "id")Long id){
+        Propietario propietario = propietarioDAO.findById(id).get();
+        return dateHandler.ultimaBoleta(propietario);
     }
 }
 
