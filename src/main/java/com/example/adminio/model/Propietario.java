@@ -1,6 +1,10 @@
 package com.example.adminio.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Null;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "propietario")
@@ -9,7 +13,7 @@ public class Propietario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pro_id")
-    private String id;
+    private Long id;
 
     @Column(name = "pro_nombre")
     private String nombre;
@@ -25,6 +29,29 @@ public class Propietario {
 
     @Column(name = "pro_contrasena")
     private String contrasena;
+
+    @Column(name = "pro_m2")
+    private int m2;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "pro_id")
+    private Set<Boleta> boletas;
+
+    public Propietario(Long id, String nombre,int m2) {
+        this.id = id;
+        this.nombre= nombre;
+        this.m2=m2;
+    }
+
+    public Propietario(){}
+
+    public int getM2() {
+        return m2;
+    }
+
+    public void setM2(int m2) {
+        this.m2 = m2;
+    }
 
     public Propietario(String nombre, String correo, String ntelefono, String direccion, String contraseña) {
         this.nombre = nombre;
@@ -83,5 +110,21 @@ public class Propietario {
 
     public void setContraseña(String contraseña) {
         this.contrasena = contraseña;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Set<Boleta> getBoletas() {
+        return boletas;
+    }
+
+    public void setBoletas(Set<Boleta> boletas) {
+        this.boletas = boletas;
     }
 }
