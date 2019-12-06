@@ -1,34 +1,16 @@
-HELP.md
-*.bak_*
-.directory
-.mvn
-/target/
-!.mvn/wrapper/maven-wrapper.jar
-/datausr/
-
-### STS ###
-.apt_generated
+# Eclipse
 .classpath
-.factorypath
 .project
-.settings
-.springBeans
-.sts4-cache
+.settings/
 
-### IntelliJ IDEA ###
-.idea
-*.iws
+# Intellij
+.idea/
 *.iml
-*.ipr
+*.iws
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-/build/
+# Mac
+.DS_Store
 
-### VS Code ###
-.vscode/
-application.properties
+# Maven
+log/
+target/
