@@ -1,6 +1,7 @@
 package com.example.adminio.Utiles;
 
 import com.example.adminio.Utiles.DataAuxiliar.BoletaAuxiliar;
+import com.example.adminio.Utiles.DataAuxiliar.PropietarioAuxiliar;
 import com.example.adminio.model.Boleta;
 import com.example.adminio.model.GastoComun;
 import com.example.adminio.model.Propietario;
@@ -12,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -54,4 +56,44 @@ public class DateHandler {
         Boleta boleta = boletas.get(boletas.size()-1);
         return  new BoletaAuxiliar(boleta.getId(),boleta.getMes(),boleta.getValor(),boleta.getFechaVencimiento(),boleta.isPagada(),boleta.getFechaEmision());
     }
+
+    public List<BoletaAuxiliar> historiaBoleta(Propietario propietario) {
+        List<Boleta> boletas = propietario.getBoletas();
+        List<Boleta> historia = new ArrayList<>();
+        if(boletas.size()>6) {
+            historia = boletas.subList(boletas.size() - 6, boletas.size() - 1);
+        }else{
+            historia = boletas;
+        }
+        List<BoletaAuxiliar> boletaAuxiliars = new ArrayList<>();
+        for(Boleta boleta:historia){
+            boletaAuxiliars.add(new BoletaAuxiliar(boleta.getId(),boleta.getMes(),boleta.getValor(),boleta.getFechaVencimiento(),boleta.isPagada(),boleta.getFechaEmision()));
+        }
+        return boletaAuxiliars;
+    }
+
+    public List<PropietarioAuxiliar> getMorosos(List<Propietario> lista){
+        List<PropietarioAuxiliar> morosos = new ArrayList<>();
+        for(Propietario propietario:lista){
+            if(esMoroso(propietario)){
+                morosos.add(new PropietarioAuxiliar(propietario.getId(),propietario.getNombre(),propietario.getDireccion(),propietario.getCorreo(),propietario.getNtelefono()));
+            }
+        }
+        return morosos;
+    }
+
+    private boolean esMoroso(Propietario propietario) {
+        List<Boleta> boletas = propietario.getBoletas();
+        Date hoy = new Date();
+        for(int i=boletas.size()-1;i>=0;i--){
+            Boleta boleta = boletas.get(i);
+            if(!boleta.isPagada()&&hoy.before(boleta.getFechaVencimiento())){
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+
 }

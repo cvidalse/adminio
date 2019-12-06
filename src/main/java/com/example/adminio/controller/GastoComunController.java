@@ -82,8 +82,15 @@ public class GastoComunController {
 
     @RequestMapping("/ultimaBoleta")
     public BoletaAuxiliar ultimaBoleta(@RequestParam(value = "id")Long id){
-        Propietario propietario = propietarioDAO.findById(id).get();
-        return dateHandler.ultimaBoleta(propietario);
+            Propietario propietario = propietarioDAO.findById(id).get();
+            return dateHandler.ultimaBoleta(propietario);
     }
+
+    @RequestMapping("/boletahistoricas")
+    public List<BoletaAuxiliar> historiaBoleta(@RequestParam(value = "id")Long id){
+        Propietario propietario = propietarioDAO.findById(id).get();
+        return dateHandler.historiaBoleta(propietario);
+    }
+
 }
 
