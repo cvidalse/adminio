@@ -1,7 +1,6 @@
 package com.example.adminio.controller;
 
 import com.example.adminio.Utiles.CalculoGastosComunes;
-import com.example.adminio.Utiles.DataAuxiliar.BoletaAuxiliar;
 import com.example.adminio.Utiles.DateHandler;
 import com.example.adminio.model.Boleta;
 import com.example.adminio.model.GastoComun;
@@ -57,8 +56,8 @@ public class GastoComunController {
     */
 
     @RequestMapping("/gasto_comun_historico")
-    public List<GastoComun> gastosComunesHistoricos() throws ParseException {
-        return dateHandler.getHistoria();
+    public List<GastoComun> gastosComunesHistoricos(int meses) throws ParseException {
+        return dateHandler.getHistoria(meses);
     }
 
     @Scheduled(cron="1 * * * * *")
@@ -74,22 +73,17 @@ public class GastoComunController {
         double m2Totales = calculoGastosComunes.calcularTotalM2(propietarios);
         double cobro = 0;
         for(Propietario propietario : propietarios){
-            double proporcion = (double) propietario.getM2()/m2Totales;
+            int m2Propietario = calculoGastosComunes.calcularM2Propietario(propietario);
+            double proporcion = (double) m2Propietario/m2Totales;
             cobro = gasto*proporcion;
             boletaDao.save(new Boleta(mes,cobro,propietario,false,fvencimiento,hoy));
         }
     }
 
-    @RequestMapping("/ultimaBoleta")
-    public BoletaAuxiliar ultimaBoleta(@RequestParam(value = "id")Long id){
-            Propietario propietario = propietarioDAO.findById(id).get();
-            return dateHandler.ultimaBoleta(propietario);
-    }
-
     @RequestMapping("/boletahistoricas")
-    public List<BoletaAuxiliar> historiaBoleta(@RequestParam(value = "id")Long id){
+    public List<Boleta> historiaBoleta(@RequestParam(value = "id")Long id, @RequestParam(value = "cantidad")int cantidad){
         Propietario propietario = propietarioDAO.findById(id).get();
-        return dateHandler.historiaBoleta(propietario);
+        return dateHandler.historiaBoleta(propietario,cantidad);
     }
 
 }

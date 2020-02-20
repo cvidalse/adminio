@@ -1,5 +1,7 @@
 package com.example.adminio.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
@@ -20,6 +22,7 @@ public class Boleta {
 
     @ManyToOne
     @JoinColumn(name = "pro_id")
+    @JsonIgnore
     private Propietario propietario;
 
     @Column(name = "boleta_fechavencimento")
@@ -30,6 +33,7 @@ public class Boleta {
 
     @Column(name = "boleta_fechaemision")
     private Date fechaEmision;
+
 
     public Boleta(){}
 

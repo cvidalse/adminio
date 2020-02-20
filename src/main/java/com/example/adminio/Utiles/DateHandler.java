@@ -1,7 +1,5 @@
 package com.example.adminio.Utiles;
 
-import com.example.adminio.Utiles.DataAuxiliar.BoletaAuxiliar;
-import com.example.adminio.Utiles.DataAuxiliar.PropietarioAuxiliar;
 import com.example.adminio.model.Boleta;
 import com.example.adminio.model.GastoComun;
 import com.example.adminio.model.Propietario;
@@ -38,12 +36,12 @@ public class DateHandler {
         return lista;
     }
 
-    public List<GastoComun> getHistoria() throws ParseException {
+    public List<GastoComun> getHistoria(int meses) throws ParseException {
         Date fconsulta = new Date();
         LocalDate localDate = fconsulta.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         localDate = localDate.minus(1, ChronoUnit.MONTHS);
         String ftermino = localDate.getYear()+ "-"+(localDate.getMonthValue())+"-"+localDate.lengthOfMonth();
-        localDate = localDate.minus(6, ChronoUnit.MONTHS);
+        localDate = localDate.minus(meses, ChronoUnit.MONTHS);
         String fechainicio = localDate.getYear() + "-" + ((localDate.getMonthValue())) + "-01";
         Date finicio = new SimpleDateFormat("yyyy-MM-dd").parse(fechainicio);
         Date ftermino2 = new SimpleDateFormat("yyyy-MM-dd").parse(ftermino);
@@ -51,32 +49,23 @@ public class DateHandler {
         return lista;
     }
 
-    public BoletaAuxiliar ultimaBoleta(Propietario propietario){
-        List<Boleta> boletas = propietario.getBoletas();
-        Boleta boleta = boletas.get(boletas.size()-1);
-        return  new BoletaAuxiliar(boleta.getId(),boleta.getMes(),boleta.getValor(),boleta.getFechaVencimiento(),boleta.isPagada(),boleta.getFechaEmision());
-    }
-
-    public List<BoletaAuxiliar> historiaBoleta(Propietario propietario) {
+    public List<Boleta> historiaBoleta(Propietario propietario, int historial) {
         List<Boleta> boletas = propietario.getBoletas();
         List<Boleta> historia = new ArrayList<>();
-        if(boletas.size()>6) {
-            historia = boletas.subList(boletas.size() - 6, boletas.size() - 1);
+        if(boletas.size()>historial) {
+            historia = boletas.subList(boletas.size() - historial, boletas.size() - 1);
         }else{
             historia = boletas;
         }
-        List<BoletaAuxiliar> boletaAuxiliars = new ArrayList<>();
-        for(Boleta boleta:historia){
-            boletaAuxiliars.add(new BoletaAuxiliar(boleta.getId(),boleta.getMes(),boleta.getValor(),boleta.getFechaVencimiento(),boleta.isPagada(),boleta.getFechaEmision()));
-        }
-        return boletaAuxiliars;
+
+        return historia;
     }
 
-    public List<PropietarioAuxiliar> getMorosos(List<Propietario> lista){
-        List<PropietarioAuxiliar> morosos = new ArrayList<>();
+    public List<Propietario> getMorosos(List<Propietario> lista){
+        List<Propietario> morosos = new ArrayList<>();
         for(Propietario propietario:lista){
             if(esMoroso(propietario)){
-                morosos.add(new PropietarioAuxiliar(propietario.getId(),propietario.getNombre(),propietario.getDireccion(),propietario.getCorreo(),propietario.getNtelefono()));
+                morosos.add(propietario);
             }
         }
         return morosos;
