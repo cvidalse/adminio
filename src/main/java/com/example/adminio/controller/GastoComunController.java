@@ -60,6 +60,10 @@ public class GastoComunController {
         return dateHandler.getHistoria(meses);
     }
 
+    /*
+    genera boletas automaticamente
+     */
+
     @Scheduled(cron="1 * * * * *")
     public void generarCobro() throws ParseException {
         Date hoy = new Date();
@@ -80,6 +84,9 @@ public class GastoComunController {
         }
     }
 
+    /*
+      entraga las boletas de un usuario indicando el id de este y la cantidad de boletas
+     */
     @RequestMapping("/boletahistoricas")
     public List<Boleta> historiaBoleta(@RequestParam(value = "id")Long id, @RequestParam(value = "cantidad")int cantidad){
         Propietario propietario = propietarioDAO.findById(id).get();

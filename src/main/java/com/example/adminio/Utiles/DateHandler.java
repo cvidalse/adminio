@@ -23,7 +23,9 @@ public class DateHandler {
     private GastoComunDAO gastoComunDAO;
 
 
-
+    /*
+    obtiene los gastos comunes del mes actual
+     */
     public List<GastoComun> getMesActual() throws ParseException {
         Date fconsulta = new Date();
         LocalDate localDate = fconsulta.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -35,6 +37,10 @@ public class DateHandler {
         List<GastoComun> lista = gastoComunDAO.findAllByFechaPagoBetween(finicio,ftermino2);
         return lista;
     }
+
+    /*
+    obtoene los gastos comunes en un rango de tiempo
+     */
 
     public List<GastoComun> getHistoria(int meses) throws ParseException {
         Date fconsulta = new Date();
@@ -49,6 +55,9 @@ public class DateHandler {
         return lista;
     }
 
+    /*
+    obtoene las boletas en un rango de tiempo
+    */
     public List<Boleta> historiaBoleta(Propietario propietario, int historial) {
         List<Boleta> boletas = propietario.getBoletas();
         List<Boleta> historia = new ArrayList<>();
@@ -60,6 +69,10 @@ public class DateHandler {
 
         return historia;
     }
+
+        /*
+    obtoene los usuarios morosos en un rango de tiempo
+     */
 
     public List<Propietario> getMorosos(List<Propietario> lista){
         List<Propietario> morosos = new ArrayList<>();

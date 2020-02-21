@@ -23,6 +23,9 @@ public class CalculoGastosComunes {
         return meses[mes-1];
     }
 
+    /*
+        calcula los gastos del mes
+    */
     public int calcularGastosMes(List<GastoComun> lista) throws ParseException {
         int valor = 0;
         for(int i =0;i<lista.size();i++){
@@ -30,16 +33,16 @@ public class CalculoGastosComunes {
         }
         return valor;
     }
-
+    /*
+        calcula los m2 totales de el condominio
+    */
     public int calcularTotalM2(List<Propietario> propietarios){
         int m2totales=0;
         for(Propietario propietario: propietarios){
             Iterator<Propiedad> it_propiedades = propietario.getPropiedades().iterator();
             while(it_propiedades.hasNext()){
-
                 m2totales+=it_propiedades.next().getM2();
             }
-            System.out.println("metros totales" +m2totales);
         }
         return m2totales;
     }
@@ -50,7 +53,6 @@ public class CalculoGastosComunes {
         while(it_propiedades.hasNext()){
             m2Propietario+=it_propiedades.next().getM2();
         }
-        System.out.println("metros propietario"+m2Propietario);
         return m2Propietario;
     }
 
