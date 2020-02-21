@@ -1,5 +1,7 @@
 package com.example.adminio.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -34,6 +36,10 @@ public class GastoComun {
 
     @Column(name = "gasto_comprobante",nullable = true)
     private byte[] comprobante;
+
+    @ManyToOne
+    @JsonIgnore
+    private Boleta boleta;
 
     @Override
     public String toString() {

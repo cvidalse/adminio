@@ -4,6 +4,7 @@ import com.example.adminio.Utiles.CalculoGastosComunes;
 
 import com.example.adminio.Utiles.CrudHandler;
 import com.example.adminio.Utiles.DateHandler;
+import com.example.adminio.model.Boleta;
 import com.example.adminio.model.GastoComun;
 import com.example.adminio.model.Propiedad;
 import com.example.adminio.model.Propietario;
@@ -119,6 +120,24 @@ public class AdministradorController {
     public void editarGasto(GastoComun gastoComun){
         gastoComunDAO.save(gastoComun);
     }
+
+    @RequestMapping("/getPropietarionombre")
+    public Propietario getPropietario(String nombre){
+        Propietario propietario = propietarioDAO.findByNombre(nombre);
+        return propietario;
+    }
+    @RequestMapping("/getPropietariosId")
+    public Propietario getPropietario(Long id){
+        Propietario propietario = propietarioDAO.findById(id).get();
+        return propietario;
+    }
+    @RequestMapping("/registarPago")
+    public void registrarPago(Long id){
+        Boleta boleta = boletaDao.findById(id).get();
+        boleta.setPagada(true);
+    }
+    
+
 
 
 

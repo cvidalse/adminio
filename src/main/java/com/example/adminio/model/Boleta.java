@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "boleta")
@@ -34,16 +36,38 @@ public class Boleta {
     @Column(name = "boleta_fechaemision")
     private Date fechaEmision;
 
+    @OneToMany
+    private List<GastoComun> gastoComunes;
 
     public Boleta(){}
 
-    public Boleta( String mes, double valor, Propietario propietario, boolean pago, Date fechaVencimiento,Date fechaEmision) {
+    public Boleta( String mes, double valor, Propietario propietario, boolean pago, Date fechaVencimiento,Date fechaEmision,List<GastoComun> gastoComunes) {
         this.fechaVencimiento = fechaVencimiento;
         this.pagada=pago;
         this.mes = mes;
         this.valor = valor;
         this.propietario = propietario;
         this.fechaEmision=fechaEmision;
+        this.gastoComunes = gastoComunes;
+    }
+
+
+    public Boleta(String mes, double valor, Propietario propietario, Date fechaVencimiento, boolean pagada, Date fechaEmision, List<GastoComun> gastoComunes) {
+        this.mes = mes;
+        this.valor = valor;
+        this.propietario = propietario;
+        this.fechaVencimiento = fechaVencimiento;
+        this.pagada = pagada;
+        this.fechaEmision = fechaEmision;
+        this.gastoComunes = gastoComunes;
+    }
+
+    public List<GastoComun> getGastoComunes() {
+        return gastoComunes;
+    }
+
+    public void setGastoComunes(List<GastoComun> gastoComunes) {
+        this.gastoComunes = gastoComunes;
     }
 
     public String getMes() {

@@ -76,7 +76,7 @@ public class GastoComunController {
             int m2Propietario = calculoGastosComunes.calcularM2Propietario(propietario);
             double proporcion = (double) m2Propietario/m2Totales;
             cobro = gasto*proporcion;
-            boletaDao.save(new Boleta(mes,cobro,propietario,false,fvencimiento,hoy));
+            boletaDao.save(new Boleta(mes,cobro,propietario,false,fvencimiento,hoy,dateHandler.getMesActual()));
         }
     }
 
