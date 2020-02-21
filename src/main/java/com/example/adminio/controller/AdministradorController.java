@@ -136,7 +136,7 @@ public class AdministradorController {
         Boleta boleta = boletaDao.findById(id).get();
         boleta.setPagada(true);
     }
-    
+
 
 
 

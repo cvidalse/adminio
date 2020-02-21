@@ -40,18 +40,6 @@ public class Boleta {
     private List<GastoComun> gastoComunes;
 
     public Boleta(){}
-
-    public Boleta( String mes, double valor, Propietario propietario, boolean pago, Date fechaVencimiento,Date fechaEmision,List<GastoComun> gastoComunes) {
-        this.fechaVencimiento = fechaVencimiento;
-        this.pagada=pago;
-        this.mes = mes;
-        this.valor = valor;
-        this.propietario = propietario;
-        this.fechaEmision=fechaEmision;
-        this.gastoComunes = gastoComunes;
-    }
-
-
     public Boleta(String mes, double valor, Propietario propietario, Date fechaVencimiento, boolean pagada, Date fechaEmision, List<GastoComun> gastoComunes) {
         this.mes = mes;
         this.valor = valor;
@@ -132,10 +120,11 @@ public class Boleta {
                 "id=" + id +
                 ", mes='" + mes + '\'' +
                 ", valor=" + valor +
-                "fechaVencimiento=" + fechaVencimiento +
+                ", propietario=" + propietario +
+                ", fechaVencimiento=" + fechaVencimiento +
                 ", pagada=" + pagada +
                 ", fechaEmision=" + fechaEmision +
+                ", gastoComunes=" + gastoComunes +
                 '}';
     }
-
 }

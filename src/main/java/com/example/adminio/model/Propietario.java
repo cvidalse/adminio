@@ -56,6 +56,8 @@ public class Propietario {
         this.contrasena = contraseña;
     }
 
+
+
     @Override
     public String toString() {
         return "Propietario{" +

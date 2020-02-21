@@ -29,6 +29,9 @@ public class Propiedad {
         this.m2 = m2;
     }
 
+
+
+
     public Propiedad(int numeroPropiedad, int m2, Propietario propietario) {
         this.numeroPropiedad = numeroPropiedad;
         this.m2 = m2;

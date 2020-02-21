@@ -50,6 +50,14 @@ public class GastoComun {
                 '}';
     }
 
+    public GastoComun(Date fechaPago, @NotNull String descripcion, @NotNull int valor, byte[] comprobante, Boleta boleta) {
+        this.fechaPago = fechaPago;
+        this.descripcion = descripcion;
+        this.valor = valor;
+        this.comprobante = comprobante;
+        this.boleta = boleta;
+    }
+
     public GastoComun(Date fechaIngreso, String descripcion, int valor) {
         this.fechaPago = fechaIngreso;
         this.descripcion = descripcion;
