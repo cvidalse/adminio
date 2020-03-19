@@ -45,7 +45,7 @@ public class cargaInicial {
             Date fecha = new SimpleDateFormat("yyyy-MM-dd").parse("2020-02-08");
             System.out.println(fecha);
             GastoComun gasto = new GastoComun(fecha,"Cambio de baño",15000);
-            gasto.setId((long)3);
+            gasto.setId((long)4);
             gastoDao.save(gasto);
         });
     }
@@ -64,8 +64,8 @@ public class cargaInicial {
     @Bean
     public CommandLineRunner ingresoPropiedad(PropietarioDAO propietarioDAO, PropiedadDAO propiedadDAO) {
         return (args -> {
-            Propietario propietario = propietarioDAO.findById((long)1).get();
-            Propietario propietario1 = propietarioDAO.findById((long)2).get();
+            Propietario propietario = propietarioDAO.findByNombre("Cristian Vidal");
+            Propietario propietario1 = propietarioDAO.findByNombre("Christian Herrera");
             propiedadDAO.save(new Propiedad(1,200,propietario));
             propiedadDAO.save(new Propiedad(1,200,propietario1));
         });

@@ -72,7 +72,7 @@ public class GastoComunController {
         date = date.plusMonths(1);
         String fecha_vencimiento = date.getYear()+"-"+date.getMonthValue()+"-"+date.getDayOfMonth();
         Date fvencimiento = new SimpleDateFormat("yyyy-MM-dd").parse(fecha_vencimiento);
-        List<Propietario> propietarios = (List<Propietario>) propietarioDAO.findAll();
+        List<Propietario> propietarios =  propietarioDAO.findAll();
         double gasto = calculoGastosComunes.calcularGastosMes(dateHandler.getMesActual());
         double m2Totales = calculoGastosComunes.calcularTotalM2(propietarios);
         double cobro = 0;
