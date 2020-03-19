@@ -10,4 +10,5 @@ import javax.transaction.Transactional;
 @Repository
 public interface PropietarioDAO extends CrudRepository<Propietario,Long> {
 
+    Propietario findByNombre(String nombre);
 }

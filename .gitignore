@@ -1,16 +1,17 @@
-# Eclipse
+/target/
+!.mvn/wrapper/maven-wrapper.jar
+/datausr/
+
+### STS ###
+.apt_generated
 .classpath
 .project
 .settings/
-
 # Intellij
 .idea/
 *.iml
 *.iws
-
-# Mac
 .DS_Store
-
 # Maven
 log/
 target/
@@ -20,3 +21,4 @@ HELP.md
 .mvn
 /target/
 !.mvn/wrapper/maven-wrapper.jar
+

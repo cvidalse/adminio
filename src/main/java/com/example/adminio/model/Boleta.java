@@ -1,8 +1,12 @@
 package com.example.adminio.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "boleta")
@@ -20,6 +24,7 @@ public class Boleta {
 
     @ManyToOne
     @JoinColumn(name = "pro_id")
+    @JsonIgnore
     private Propietario propietario;
 
     @Column(name = "boleta_fechavencimento")
@@ -31,14 +36,26 @@ public class Boleta {
     @Column(name = "boleta_fechaemision")
     private Date fechaEmision;
 
+    @OneToMany
+    private List<GastoComun> gastoComunes;
 
-    public Boleta( String mes, double valor, Propietario propietario, boolean pago, Date fechaVencimiento,Date fechaEmision) {
-        this.fechaVencimiento = fechaVencimiento;
-        this.pagada=pago;
+    public Boleta(){}
+    public Boleta(String mes, double valor, Propietario propietario, Date fechaVencimiento, boolean pagada, Date fechaEmision, List<GastoComun> gastoComunes) {
         this.mes = mes;
         this.valor = valor;
         this.propietario = propietario;
-        this.fechaEmision=fechaEmision;
+        this.fechaVencimiento = fechaVencimiento;
+        this.pagada = pagada;
+        this.fechaEmision = fechaEmision;
+        this.gastoComunes = gastoComunes;
+    }
+
+    public List<GastoComun> getGastoComunes() {
+        return gastoComunes;
+    }
+
+    public void setGastoComunes(List<GastoComun> gastoComunes) {
+        this.gastoComunes = gastoComunes;
     }
 
     public String getMes() {
@@ -95,5 +112,19 @@ public class Boleta {
 
     public void setFechaEmision(Date fechaEmision) {
         this.fechaEmision = fechaEmision;
+    }
+
+    @Override
+    public String toString() {
+        return "Boleta{" +
+                "id=" + id +
+                ", mes='" + mes + '\'' +
+                ", valor=" + valor +
+                ", propietario=" + propietario +
+                ", fechaVencimiento=" + fechaVencimiento +
+                ", pagada=" + pagada +
+                ", fechaEmision=" + fechaEmision +
+                ", gastoComunes=" + gastoComunes +
+                '}';
     }
 }

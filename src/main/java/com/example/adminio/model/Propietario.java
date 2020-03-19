@@ -1,8 +1,11 @@
 package com.example.adminio.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.Null;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -30,36 +33,30 @@ public class Propietario {
     @Column(name = "pro_contrasena")
     private String contrasena;
 
-    @Column(name = "pro_m2")
-    private int m2;
-
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "pro_id")
-    private Set<Boleta> boletas;
+    private List<Boleta> boletas;
 
-    public Propietario(Long id, String nombre,int m2) {
+    @OneToMany(mappedBy = "propietario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Propiedad> propiedades;
+
+    public Propietario(Long id, String nombre) {
         this.id = id;
         this.nombre= nombre;
-        this.m2=m2;
     }
 
     public Propietario(){}
 
-    public int getM2() {
-        return m2;
-    }
-
-    public void setM2(int m2) {
-        this.m2 = m2;
-    }
-
     public Propietario(String nombre, String correo, String ntelefono, String direccion, String contraseña) {
+
         this.nombre = nombre;
         this.correo = correo;
         this.ntelefono = ntelefono;
         this.direccion = direccion;
         this.contrasena = contraseña;
     }
+
+
 
     @Override
     public String toString() {
@@ -120,11 +117,24 @@ public class Propietario {
         this.id = id;
     }
 
-    public Set<Boleta> getBoletas() {
+    public List<Boleta> getBoletas() {
         return boletas;
     }
 
-    public void setBoletas(Set<Boleta> boletas) {
+    public void setBoletas(List<Boleta> boletas) {
         this.boletas = boletas;
     }
+
+    public void addBoleta(Boleta boleta){
+        this.boletas.add(boleta);
+    }
+    public void addPropiedad(Propiedad propiedad){
+        this.propiedades.add(propiedad);
+    }
+
+    public Set<Propiedad> getPropiedades(){
+        return this.propiedades;
+    }
+
+
 }

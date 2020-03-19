@@ -56,9 +56,13 @@ public class GastoComunController {
     */
 
     @RequestMapping("/gasto_comun_historico")
-    public List<GastoComun> gastosComunesHistoricos() throws ParseException {
-        return dateHandler.getHistoria();
+    public List<GastoComun> gastosComunesHistoricos(int meses) throws ParseException {
+        return dateHandler.getHistoria(meses);
     }
+
+    /*
+    genera boletas automaticamente
+     */
 
     @Scheduled(cron="1 * * * * *")
     public void generarCobro() throws ParseException {
@@ -73,10 +77,22 @@ public class GastoComunController {
         double m2Totales = calculoGastosComunes.calcularTotalM2(propietarios);
         double cobro = 0;
         for(Propietario propietario : propietarios){
-            double proporcion = (double) propietario.getM2()/m2Totales;
+
+            int m2Propietario = calculoGastosComunes.calcularM2Propietario(propietario);
+            double proporcion = (double) m2Propietario/m2Totales;
             cobro = gasto*proporcion;
-            boletaDao.save(new Boleta(mes,cobro,propietario,false,fvencimiento,hoy));
+            boletaDao.save(new Boleta(mes,cobro,propietario,fvencimiento,false,hoy,dateHandler.getMesActual()));
         }
     }
+
+    /*
+      entraga las boletas de un usuario indicando el id de este y la cantidad de boletas
+     */
+    @RequestMapping("/boletahistoricas")
+    public List<Boleta> historiaBoleta(@RequestParam(value = "id")Long id, @RequestParam(value = "cantidad")int cantidad){
+        Propietario propietario = propietarioDAO.findById(id).get();
+        return dateHandler.historiaBoleta(propietario,cantidad);
+    }
+
 }
 
