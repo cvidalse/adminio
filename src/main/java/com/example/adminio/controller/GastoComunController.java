@@ -77,7 +77,6 @@ public class GastoComunController {
         double m2Totales = calculoGastosComunes.calcularTotalM2(propietarios);
         double cobro = 0;
         for(Propietario propietario : propietarios){
-
             int m2Propietario = calculoGastosComunes.calcularM2Propietario(propietario);
             double proporcion = (double) m2Propietario/m2Totales;
             cobro = gasto*proporcion;
