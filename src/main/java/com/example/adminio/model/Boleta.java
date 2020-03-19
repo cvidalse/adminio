@@ -12,7 +12,7 @@ import java.util.Set;
 @Table(name = "boleta")
 public class Boleta {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "boleta_id")
     private Long id;
 
@@ -37,9 +37,11 @@ public class Boleta {
     private Date fechaEmision;
 
     @OneToMany
+    @JoinColumn(name = "boleta_id")
     private List<GastoComun> gastoComunes;
 
     public Boleta(){}
+
     public Boleta(String mes, double valor, Propietario propietario, Date fechaVencimiento, boolean pagada, Date fechaEmision, List<GastoComun> gastoComunes) {
         this.mes = mes;
         this.valor = valor;

@@ -8,7 +8,7 @@ import javax.persistence.*;
 public class Propiedad {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "propiedad_id")
     private Long idPropiedad;
 

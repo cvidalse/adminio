@@ -11,7 +11,7 @@ import java.util.Date;
 public class GastoComun {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "gasto_id")
     private Long id;
 
@@ -38,6 +38,7 @@ public class GastoComun {
     private byte[] comprobante;
 
     @ManyToOne
+    @JoinColumn(name = "boleta_id")
     @JsonIgnore
     private Boleta boleta;
 

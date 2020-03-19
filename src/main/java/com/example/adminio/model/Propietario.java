@@ -14,7 +14,7 @@ import java.util.Set;
 public class Propietario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "pro_id")
     private Long id;
 
@@ -37,7 +37,7 @@ public class Propietario {
     @JoinColumn(name = "pro_id")
     private List<Boleta> boletas;
 
-    @OneToMany(mappedBy = "propietario", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "propietario", cascade = CascadeType.REFRESH, orphanRemoval = true)
     private Set<Propiedad> propiedades;
 
     public Propietario(Long id, String nombre) {
